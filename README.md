@@ -6,6 +6,11 @@ that *does* exist under a slightly different name (you renamed it, or fat-finger
 it). Others point at a note you meant to write and never did. Those want opposite
 responses: fix the first, revisit the second. This plugin sorts them for you.
 
+> **Prefer not to install anything?** There's a browser version of the same
+> classifier at [vault-link-checker.vercel.app](https://vault-link-checker.vercel.app).
+> This plugin is the native version that reads your live vault index directly,
+> so aliases and heading/block refs are resolved for you with nothing to upload.
+
 ## What it does
 
 Run a scan and you get a report pane grouped into three buckets:
