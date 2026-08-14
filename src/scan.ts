@@ -46,7 +46,7 @@ export interface ScanInput {
 	resolvedCount: number;
 }
 
-export type MatchType = "similar name" | "possible match";
+export type MatchType = "similar name" | "possible match" | "alias match";
 
 export interface NearMiss {
 	source: string;
@@ -126,6 +126,7 @@ interface Stem {
 	path: string;
 	stem: string;
 	key: string; // lowercased stem (or alias)
+	isAlias: boolean; // true when `key` came from a frontmatter alias, not the filename
 }
 
 interface VaultIndex {
@@ -138,6 +139,7 @@ function buildIndex(files: VaultFile[], aliases: VaultAlias[]): VaultIndex {
 		path: f.path,
 		stem: f.stem,
 		key: f.stem.toLowerCase(),
+		isAlias: false,
 	}));
 
 	const normalizedIndex = new Map<string, Stem[]>();
@@ -152,6 +154,7 @@ function buildIndex(files: VaultFile[], aliases: VaultAlias[]): VaultIndex {
 			path: a.path,
 			stem: a.stem,
 			key: a.alias.toLowerCase(),
+			isAlias: true,
 		};
 		const n = normalize(entry.key);
 		if (!normalizedIndex.has(n)) normalizedIndex.set(n, []);
@@ -173,10 +176,16 @@ export function findNearMiss(
 	const targetLower = target.toLowerCase();
 	const normTarget = normalize(targetLower);
 
-	// 1. Exact normalized match (spaces / hyphens / punctuation differ).
+	// 1. Exact normalized match (spaces / hyphens / punctuation differ). Prefer a
+	// real filename over an alias; only label it an alias match when the only thing
+	// it lines up with is a frontmatter alias (which reads nothing like the target).
 	const normMatches = index.normalizedIndex.get(normTarget);
 	if (normMatches && normMatches.length) {
-		return { match: normMatches[0].path, type: "similar name" };
+		const chosen = normMatches.find((m) => !m.isAlias) ?? normMatches[0];
+		return {
+			match: chosen.path,
+			type: chosen.isAlias ? "alias match" : "similar name",
+		};
 	}
 
 	// 2. Fuzzy: Levenshtein ≤ 2 against all stems.

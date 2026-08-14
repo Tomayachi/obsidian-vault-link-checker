@@ -75,6 +75,23 @@ test("bucket: near-miss via alias (normalized alias match)", () => {
 	const r = classify(input([{ source: "Index.md", target: "moc" }]));
 	assert.equal(r.nearMisses.length, 1);
 	assert.equal(r.nearMisses[0].match, "Roadmap.md");
+	// Matched via a frontmatter alias, not a spelling-similar filename — labelled so.
+	assert.equal(r.nearMisses[0].matchType, "alias match");
+});
+
+test("similar-name label wins over alias when a real filename also matches", () => {
+	// A file literally named "MOC" should be reported as a similar-name match,
+	// not relabelled just because an alias with the same normalized key exists.
+	const withMocFile: VaultFile[] = [...files, { path: "MOC.md", stem: "MOC" }];
+	const r = classify({
+		files: withMocFile,
+		aliases,
+		unresolved: [{ source: "Index.md", target: "m.o.c" }],
+		resolvedCount: 0,
+	});
+	assert.equal(r.nearMisses.length, 1);
+	assert.equal(r.nearMisses[0].match, "MOC.md");
+	assert.equal(r.nearMisses[0].matchType, "similar name");
 });
 
 test("bucket: near-miss via token subset", () => {
@@ -214,7 +231,15 @@ test("parity: plugin findNearMiss agrees with the deployed web version", () => {
 		const pluginResult = mine.nearMisses[0]
 			? { match: mine.nearMisses[0].match, type: mine.nearMisses[0].matchType }
 			: null;
-		assert.deepEqual(pluginResult, web, `mismatch on target "${p}"`);
+		if (pluginResult && web && pluginResult.type === "alias match") {
+			// Intentional divergence: the plugin relabels alias-only matches (the web
+			// version calls them "similar name"). The matched *file* must still agree;
+			// only the label is upgraded. Not a regression.
+			assert.equal(pluginResult.match, web.match, `path mismatch on "${p}"`);
+			assert.equal(web.type, "similar name", `alias probe "${p}" should be a normalized match on the web side`);
+		} else {
+			assert.deepEqual(pluginResult, web, `mismatch on target "${p}"`);
+		}
 	}
 	void pluginIndex;
 	void findNearMiss;
