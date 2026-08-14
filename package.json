@@ -1,0 +1,23 @@
+{
+	"name": "obsidian-vault-link-check",
+	"version": "1.0.0",
+	"description": "Obsidian plugin that scans a vault for broken links and sorts them into near-misses and planned notes.",
+	"main": "main.js",
+	"type": "module",
+	"scripts": {
+		"dev": "node esbuild.config.mjs",
+		"build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
+		"test": "node --test \"test/**/*.test.ts\"",
+		"version": "node version-bump.mjs && git add manifest.json versions.json"
+	},
+	"keywords": [
+		"obsidian-plugin"
+	],
+	"license": "MIT",
+	"devDependencies": {
+		"@types/node": "^22.15.17",
+		"esbuild": "0.25.5",
+		"obsidian": "latest",
+		"typescript": "^5.8.3"
+	}
+}

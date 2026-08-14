@@ -1,0 +1,220 @@
+/* Vault Link Check — all colors come from Obsidian theme variables so it
+   follows light and dark themes automatically. */
+
+.vlc-view {
+	padding: 0 12px 16px;
+	overflow-y: auto;
+}
+
+.vlc-toolbar {
+	position: sticky;
+	top: 0;
+	background: var(--background-secondary);
+	padding: 10px 0;
+	z-index: 1;
+}
+
+.vlc-scan-btn {
+	width: 100%;
+}
+
+.vlc-empty {
+	color: var(--text-muted);
+	text-align: center;
+	padding: 32px 12px;
+}
+
+.vlc-hero {
+	text-align: center;
+	margin: 12px 0 16px;
+}
+
+.vlc-hero-pct {
+	font-size: 2.6em;
+	font-weight: 700;
+	line-height: 1.1;
+	font-variant-numeric: tabular-nums;
+	color: var(--text-normal);
+}
+
+.vlc-hero-label {
+	color: var(--text-muted);
+	font-size: var(--font-ui-small);
+	font-variant-numeric: tabular-nums;
+}
+
+.vlc-stats {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 8px;
+	margin-bottom: 12px;
+}
+
+.vlc-stat {
+	border-radius: var(--radius-m);
+	padding: 10px 6px;
+	text-align: center;
+	background: var(--background-primary);
+	border: 1px solid var(--background-modifier-border);
+}
+
+.vlc-stat-count {
+	font-size: 1.4em;
+	font-weight: 700;
+	font-variant-numeric: tabular-nums;
+	line-height: 1.2;
+}
+
+.vlc-stat--resolved .vlc-stat-count {
+	color: var(--text-success);
+}
+.vlc-stat--nearmiss .vlc-stat-count {
+	color: var(--text-warning);
+}
+.vlc-stat--planned .vlc-stat-count {
+	color: var(--text-accent);
+}
+
+.vlc-stat-label {
+	font-size: var(--font-ui-smaller);
+	color: var(--text-muted);
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	margin-top: 2px;
+}
+
+.vlc-actions {
+	margin-bottom: 12px;
+}
+.vlc-actions button {
+	width: 100%;
+}
+
+.vlc-all-clear {
+	text-align: center;
+	padding: 16px;
+	border-radius: var(--radius-m);
+	background: var(--background-modifier-success);
+	color: var(--text-normal);
+}
+
+.vlc-section {
+	border: 1px solid var(--background-modifier-border);
+	border-radius: var(--radius-m);
+	margin-bottom: 10px;
+	overflow: hidden;
+}
+
+.vlc-summary {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 10px 12px;
+	cursor: pointer;
+	font-weight: 600;
+	list-style: none;
+}
+.vlc-summary::-webkit-details-marker {
+	display: none;
+}
+
+.vlc-section--nearmiss .vlc-summary {
+	border-left: 3px solid var(--text-warning);
+}
+.vlc-section--planned .vlc-summary {
+	border-left: 3px solid var(--text-accent);
+}
+
+.vlc-badge {
+	font-variant-numeric: tabular-nums;
+	font-size: var(--font-ui-smaller);
+	font-weight: 700;
+	padding: 1px 7px;
+	border-radius: 10px;
+	background: var(--background-modifier-border);
+	color: var(--text-normal);
+}
+
+.vlc-summary-hint {
+	font-weight: 400;
+	color: var(--text-muted);
+	font-size: var(--font-ui-smaller);
+}
+
+.vlc-section-body {
+	padding: 4px 12px 12px;
+}
+
+.vlc-caveat {
+	color: var(--text-muted);
+	font-size: var(--font-ui-smaller);
+	font-style: italic;
+	margin: 4px 0 10px;
+}
+
+.vlc-group {
+	margin-bottom: 12px;
+}
+
+.vlc-group-header {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	font-size: var(--font-ui-smaller);
+	color: var(--text-muted);
+	padding: 4px 0 6px;
+	border-bottom: 1px solid var(--background-modifier-border);
+	margin-bottom: 4px;
+}
+
+.vlc-group-icon {
+	display: inline-flex;
+	color: var(--text-faint);
+}
+
+.vlc-row {
+	display: flex;
+	align-items: baseline;
+	gap: 6px;
+	padding: 3px 0;
+	font-size: var(--font-ui-small);
+	flex-wrap: wrap;
+}
+
+.vlc-link,
+.vlc-target {
+	font-family: var(--font-monospace);
+	font-size: var(--font-ui-smaller);
+	word-break: break-all;
+}
+
+.vlc-arrow {
+	color: var(--text-faint);
+}
+
+.vlc-target {
+	color: var(--text-accent);
+}
+
+.vlc-clickable {
+	cursor: pointer;
+}
+.vlc-clickable:hover {
+	text-decoration: underline;
+}
+
+.vlc-matchtype {
+	font-size: var(--font-ui-smaller);
+	color: var(--text-faint);
+	font-style: italic;
+	margin-left: auto;
+}
+
+.vlc-recurring {
+	font-size: var(--font-ui-smaller);
+	color: var(--text-accent);
+	background: var(--background-modifier-border);
+	border-radius: 4px;
+	padding: 0 5px;
+	margin-left: auto;
+}

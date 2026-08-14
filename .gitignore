@@ -1,0 +1,16 @@
+# build
+main.js
+*.js.map
+
+# deps
+node_modules/
+
+# obsidian test vault plugin data
+test-vault/.obsidian/plugins/vault-link-check/data.json
+
+# os / editor
+.DS_Store
+*.log
+
+# submission guide (for Tom, not shipped)
+SUBMISSION.md
