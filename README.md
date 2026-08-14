@@ -11,6 +11,8 @@ responses: fix the first, revisit the second. This plugin sorts them for you.
 > This plugin is the native version that reads your live vault index directly,
 > so aliases and heading/block refs are resolved for you with nothing to upload.
 
+![The report pane: a resolve-rate hero, near-misses with suggested targets, and planned notes flagged recurring](docs/report.png)
+
 ## What it does
 
 Run a scan and you get a report pane grouped into three buckets:
@@ -59,6 +61,8 @@ release into `<vault>/.obsidian/plugins/vault-link-check/`, then enable it.
 - **Settings** let you exclude folders (templates, archives), hide either section,
   and choose whether planned notes count against your resolve rate (off by default
   — they're ideas, not bugs).
+
+![The settings tab: excluded folders, show near-misses, show planned notes, and treat planned notes as problems](docs/settings.png)
 
 ## Privacy
 
