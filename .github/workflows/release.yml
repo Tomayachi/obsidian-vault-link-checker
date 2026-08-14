@@ -42,5 +42,5 @@ jobs:
           tag="${GITHUB_REF#refs/tags/}"
           gh release create "$tag" \
             --title="$tag" \
-            --notes "Compatibility and code-quality fixes for the plugin review: raise minAppVersion to 1.7.2 to match the Obsidian APIs used, await previously floating promises, and attach build-provenance attestations to the release assets. No user-facing behavior change." \
+            --generate-notes \
             main.js manifest.json styles.css

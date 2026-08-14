@@ -1,7 +1,7 @@
 {
 	"id": "vault-link-check",
 	"name": "Vault Link Check",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"minAppVersion": "1.7.2",
 	"description": "Scan your vault for broken internal links and sort them into near-misses (a note that exists under a slightly different name) and planned notes you meant to write. Runs entirely on your device.",
 	"author": "Tomayachi",
