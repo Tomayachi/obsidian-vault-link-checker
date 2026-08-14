@@ -19,7 +19,7 @@ export default class VaultLinkCheckPlugin extends Plugin {
 		);
 
 		this.addRibbonIcon("unlink", "Vault link check", () => {
-			this.activateView();
+			void this.activateView();
 		});
 
 		this.addCommand({
@@ -50,7 +50,7 @@ export default class VaultLinkCheckPlugin extends Plugin {
 			leaf = workspace.getRightLeaf(false);
 			await leaf?.setViewState({ type: VIEW_TYPE_LINK_CHECK, active: true });
 		}
-		if (leaf) workspace.revealLeaf(leaf);
+		if (leaf) await workspace.revealLeaf(leaf);
 		return leaf?.view as LinkCheckView;
 	}
 
@@ -75,7 +75,8 @@ export default class VaultLinkCheckPlugin extends Plugin {
 	}
 
 	async loadSettings(): Promise<void> {
-		this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
+		const stored = (await this.loadData()) as Partial<VaultLinkCheckSettings> | null;
+		this.settings = Object.assign({}, DEFAULT_SETTINGS, stored);
 	}
 
 	async saveSettings(): Promise<void> {

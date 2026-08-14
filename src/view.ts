@@ -36,7 +36,7 @@ export class LinkCheckView extends ItemView {
 	}
 
 	private openNote(path: string): void {
-		this.app.workspace.openLinkText(path, "", false);
+		void this.app.workspace.openLinkText(path, "", false);
 	}
 
 	render(): void {
@@ -49,7 +49,7 @@ export class LinkCheckView extends ItemView {
 			cls: "mod-cta vlc-scan-btn",
 			text: "Scan vault",
 		});
-		scanBtn.addEventListener("click", () => this.plugin.runScan());
+		scanBtn.addEventListener("click", () => void this.plugin.runScan());
 
 		if (!this.report) {
 			const empty = root.createDiv({ cls: "vlc-empty" });
@@ -81,7 +81,7 @@ export class LinkCheckView extends ItemView {
 
 		const actions = root.createDiv({ cls: "vlc-actions" });
 		const copyBtn = actions.createEl("button", { text: "Copy report as Markdown" });
-		copyBtn.addEventListener("click", () => this.copyReport());
+		copyBtn.addEventListener("click", () => void this.copyReport());
 
 		if (nearMisses.length === 0 && planned.length === 0) {
 			const clear = root.createDiv({ cls: "vlc-all-clear" });

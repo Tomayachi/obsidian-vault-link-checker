@@ -7,6 +7,8 @@ on:
 
 permissions:
   contents: write
+  id-token: write
+  attestations: write
 
 jobs:
   build:
@@ -25,6 +27,14 @@ jobs:
           npm test
           npm run build
 
+      - name: Attest build provenance
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: |
+            main.js
+            manifest.json
+            styles.css
+
       - name: Create release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -32,5 +42,5 @@ jobs:
           tag="${GITHUB_REF#refs/tags/}"
           gh release create "$tag" \
             --title="$tag" \
-            --draft \
+            --notes "Compatibility and code-quality fixes for the plugin review: raise minAppVersion to 1.7.2 to match the Obsidian APIs used, await previously floating promises, and attach build-provenance attestations to the release assets. No user-facing behavior change." \
             main.js manifest.json styles.css
